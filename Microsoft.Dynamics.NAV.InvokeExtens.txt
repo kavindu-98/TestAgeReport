@@ -1,0 +1,43 @@
+Microsoft.Dynamics.NAV.InvokeExtensibilityMethod("Ready", "");
+
+function InitializeSignaturePad() {
+  let canvas = document.createElement("canvas");
+  canvas.id = "signbox";
+  canvas.width = 700;
+  canvas.height = 300;
+
+  let submitButton = document.createElement("button");
+  submitButton.id = "signDocument";
+  submitButton.innerHTML = "Sign document";
+
+//   let clearButton = document.createElement("button");
+//   clearButtonButton.id = "cleanbtn";
+//   clearButtonButton.innerHTML = "Clean document";
+
+  let signatureLocation = document.getElementById("controlAddIn");
+
+  signatureLocation.appendChild(canvas);
+  signatureLocation.appendChild(submitButton);
+//   signatureLocation.appendChild(clearButton);
+
+  var signaturePad = new signaturePad(canvas, {
+    backgroundColor: "rgb(255, 255, 255)",
+  });
+
+  submitButton.addEventListener("click", function (event) {
+    if (signaturePad.isEmpty()) {
+      alert("Please enter signature...");
+    } else {
+      var base64String = signaturePad.toDataURL();
+      Microsoft.Dynamics.NAV.InvokeExtensibilityMethod("Sign",[base64String])
+      signaturePad.clear();
+    }
+  });
+
+//   clearButton.addEventListener("click", function (event) {
+//     var base64String = signaturePad.toDataURL();
+//     Microsoft.Dynamics.NAV.InvokeExtensibilityMethod("Sign",[base64String])
+//       signaturePad.clear();
+//     }
+//   );
+}
