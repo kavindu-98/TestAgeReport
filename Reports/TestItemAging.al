@@ -2,7 +2,7 @@ report 50003 AgedTest1
 {
 
     DefaultLayout = RDLC;
-    RDLCLayout = 'ItemAgingReport2.rdl';
+    RDLCLayout = 'ItemAgingReport.rdl';
     Caption = 'Item Aging Reports test';
     ApplicationArea = All;
     UsageCategory = ReportsAndAnalysis;
@@ -12,104 +12,150 @@ report 50003 AgedTest1
     {
         dataitem(Item; Item)
         {
-            DataItemTableView = SORTING("No.");
-            PrintOnlyIfDetail = true;
             RequestFilterFields = "No.";
-
-            // column(ReportCreateUser; ReportCreateUser)
-            // {
-
-            // }
-            // column(SystemCreatedBy; CreatedUser."Full Name")
-            // {
-
-            // }
-
-            // column(SystemCreatedAt; SystemCreatedAt)
-            // {
-
-            // }
-            // column(ApproverName; ApproveUser."Full Name")
-            // {
-
-            // }
-
-            // column(ApprovalDateTime; Approver."Last Date-Time Modified")
-            // {
-
-            // }
-            // column(Compname; CompanyInfo.Name)
-            // {
-
-            // }
-            // column(CompAddress; CompanyInfo.Address)
-            // {
-
-            // }
-            // column(CompAddress2; CompanyInfo."Address 2")
-            // {
-
-            // }
-            // column(CompCity; CompanyInfo.City)
-            // {
-
-            // }
-            // column(CompImage; CompanyInfo.Picture)
-            // {
-
-            // }
-
-
             dataitem("Item Ledger Entry"; "Item Ledger Entry")
             {
-                DataItemLink = "Item No." = FIELD("No.");
-                column(Document_No_; "Document No.")
+                DataItemTableView = SORTING("Item No.", "Posting Date");
+                PrintOnlyIfDetail = true;
+                DataItemLink = "Item No." = field("No.");
+
+                column(HeaderText5; HeaderText[5])
                 {
-
                 }
-                column(Posting_Date; "Posting Date")
+                column(HeaderText4; HeaderText[4])
                 {
-
                 }
-                column(Item_No_; "Item No.")
+                column(HeaderText3; HeaderText[3])
                 {
-
                 }
-                // column(ItemDescription; )
-                // {
-
-                // }
-                column(Unit_of_Measure_Code; "Unit of Measure Code")
+                column(HeaderText2; HeaderText[2])
                 {
-
                 }
-                column(Quantity; Quantity)
+                column(HeaderText1; HeaderText[1])
                 {
-
                 }
-                column(Cost_Amount__Actual_; "Cost Amount (Actual)")
+                column(CompanyName; CompanyDisplayName)
                 {
-
                 }
+                column(ItemAgingReportCptn; ItemAgingReportCptnLbl)
+                {
+                }
+                column(TotalQtyCptn; TotalQtyCptnLbl)
+                {
+                }
+                column(Name1_Item; "Item Ledger Entry".Description)
+                {
+                    IncludeCaption = true;
+                }
+                column(No_Item; "Item Ledger Entry"."Item No.")
+                {
+                    IncludeCaption = true;
+                }
+                column(AgedILE1RemQty; AgedItemLedgEntry[1]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(AgedILE2RemQty; AgedItemLedgEntry[2]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(AgedILE3RemQty; AgedItemLedgEntry[3]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(AgedILE4RemQty; AgedItemLedgEntry[4]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(AgedILE5RemQty; AgedItemLedgEntry[5]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+
+                column(TotalILE1RemQty; TotalItemLedgEntry[1]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(TotalILE2RemQty; TotalItemLedgEntry[2]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(TotalILE3RemQty; TotalItemLedgEntry[3]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(TotalILE4RemQty; TotalItemLedgEntry[4]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(TotalILE5RemQty; TotalItemLedgEntry[5]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(GrandTotalILE5RemQty; GrandTotalItemLedgEntry[5]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(GrandTotalILE4RemQty; GrandTotalItemLedgEntry[4]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(GrandTotalILE3RemQty; GrandTotalItemLedgEntry[3]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(GrandTotalILE2RemQty; GrandTotalItemLedgEntry[2]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+                column(GrandTotalILE1RemQty; GrandTotalItemLedgEntry[1]."Remaining Quantity")
+                {
+                    AutoFormatType = 1;
+                }
+
                 trigger OnAfterGetRecord()
+                var
+                    PeriodIndex: Integer;
+                    Item: Record Item;
+
                 begin
-                    ;
+                    Clear(TotalItemLedgEntry);
+                    if Item.Get("Item No.") then;
+                    // if Item.FindFirst() then
+                    //     repeat begin
+                    //         ItemLedgEntryEndingDate.SetRange("Item No.", Item."No.");
+                    //         if ItemLedgEntryEndingDate.FindSet() then
+                    //             repeat
+                    //                 if ItemLedgEntryEndingDate."Posting Date" <= WorkDate() then begin
+                    //                     PeriodIndex := GetPeriodIndex(ItemLedgEntryEndingDate."Posting Date");
+                    //                     Clear(AgedItemLedgEntry);
+                    //                     AgedItemLedgEntry[PeriodIndex]."Remaining Quantity" := ItemLedgEntryEndingDate."Remaining Quantity";
+                    //                     TotalItemLedgEntry[PeriodIndex]."Remaining Quantity" += ItemLedgEntryEndingDate."Remaining Quantity";
+                    //                     GrandTotalItemLedgEntry[PeriodIndex]."Remaining Quantity" += ItemLedgEntryEndingDate."Remaining Quantity";
+                    //                     // TotalItemLedgEntry[1].Quantity += ItemLedgEntryEndingDate."Remaining Quantity";
+                    //                     // GrandTotalItemLedgEntry[1].Quantity += ItemLedgEntryEndingDate."Remaining Quantity";
+                    //                     NumberOfLines += 1;
+                    //                 end;
+                    //             until ItemLedgEntryEndingDate.Next() = 0;
+                    //     end until Item.Next() = 0;
+
+
+
                 end;
 
-                trigger OnPreDataItem()
-                begin
-                    // SetRange("Entry No.", "Item Register"."From Entry No.", "Item Register"."To Entry No.");
-                end;
+
+
+                // trigger OnPreDataItem()
+                // begin
+                //     SetRange("Posting Date", EndingDate + 1, DMY2Date(31, 12, 9999));
+                // end;
+
             }
-            // trigger OnAfterGetRecord()
-            // begin
-            //     CreatedUser.Reset;
-            //     if CreatedUser.Get(SystemCreatedBy) then
-            //         CreatedUserSetup.Get(CreatedUser."User Name");
-            // end;
-        }
-    }
 
+        }
+
+
+    }
     requestpage
     {
         SaveValues = true;
@@ -162,41 +208,37 @@ report 50003 AgedTest1
         FormatDocument: Codeunit "Format Document";
     begin
         StartDateTime := CurrentDateTime();
-        ItemFilter := FormatDocument.GetRecordFiltersWithCaptions(Item);
+        ItemFilter := FormatDocument.GetRecordFiltersWithCaptions("Item Ledger Entry");
 
-        GLSetup.Get();
+        // GLSetup.Get();
 
-        // CalcDates();
-        // CreateHeadings();
+        CalcDates();
+        CreateHeadings();
 
         PageGroupNo := 1;
         NextPageGroupNo := 1;
-        ItemFilterCheck := (ItemFilter <> 'No.');
+        // ItemFilterCheck := (ItemFilter <> 'No.');
 
         CompanyDisplayName := COMPANYPROPERTY.DisplayName();
     end;
 
+
     trigger OnPostReport()
     begin
         FinishDateTime := CurrentDateTime();
-        // LogReportTelemetry(StartDateTime, FinishDateTime, NumberOfLines);
+        LogReportTelemetry(StartDateTime, FinishDateTime, NumberOfLines);
     end;
 
 
     var
-        GLSetup: Record "General Ledger Setup";
-        PhsInventLedgerEntry: Record "Phys. Inventory Ledger Entry";
+
+
         ItemLedgEntryEndingDate: Record "Item Ledger Entry";
         TotalItemLedgEntry: array[5] of Record "Item Ledger Entry";
         GrandTotalItemLedgEntry: array[5] of Record "Item Ledger Entry";
         AgedItemLedgEntry: array[6] of Record "Item Ledger Entry";
-        TempCurrency: Record Currency temporary;
-        TempCurrency2: Record Currency temporary;
-        TempCurrencyAmount: Record "Currency Amount" temporary;
         PeriodLength: DateFormula;
-        PrintItemQty: Boolean;
         EndingDate: Date;
-        AgingBy: Option "Posting Date";
         HeadingType: Option "Date Interval","Number of Days";
         NewPagePerItem: Boolean;
         PeriodStartDate: array[5] of Date;
@@ -222,11 +264,7 @@ report 50003 AgedTest1
         CurrReportPageNoCptnLbl: Label 'Page';
         AllQtyCptnLbl: Label 'All Quantity in Inventory';
         ItemAgedQtyCptnLbl: Label 'Item Aged Quantity';
-        ILEEndDateQtyCptnLbl: Label 'Original Quantity ';
-        ILEEndDateDueDateCptnLbl: Label 'Due Date';
-        ILEEndDateDocNoCptnLbl: Label 'Document No.';
-        ILEEndDatePstngDateCptnLbl: Label 'Posting Date';
-        ILEEndDateDocTypeCptnLbl: Label 'Document Type';
+
         TotalQtyCptnLbl: Label 'Total Quantity';
         EnterDateFormulaErr: Label 'Enter a date formula in the Period Length field.';
         CompanyDisplayName: Text;
@@ -240,5 +278,71 @@ report 50003 AgedTest1
         FinishDateTime: DateTime;
         ItemFilter: Text;
         PrintDetails: Boolean;
+
+    local procedure CalcDates()
+    var
+        PeriodLength2: DateFormula;
+        i: Integer;
+    begin
+        if not Evaluate(PeriodLength2, StrSubstNo(Text032Txt, PeriodLength)) then
+            Error(EnterDateFormulaErr);
+
+        PeriodEndDate[1] := EndingDate;
+        PeriodStartDate[1] := CalcDate(PeriodLength2, EndingDate + 1);
+
+        for i := 2 to ArrayLen(PeriodEndDate) do begin
+            PeriodEndDate[i] := PeriodStartDate[i - 1] - 1;
+            PeriodStartDate[i] := CalcDate(PeriodLength2, PeriodEndDate[i] + 1);
+        end;
+        PeriodStartDate[i] := 0D;
+
+        for i := 1 to ArrayLen(PeriodEndDate) do
+            if PeriodEndDate[i] < PeriodStartDate[i] then
+                Error(Text010, PeriodLength);
+    end;
+
+    local procedure CreateHeadings()
+    var
+        i: Integer;
+    begin
+
+        i := 1;
+        while i < ArrayLen(PeriodEndDate) do begin
+            if HeadingType = HeadingType::"Date Interval" then
+                HeaderText[i] := StrSubstNo('%1\..%2', PeriodStartDate[i], PeriodEndDate[i])
+            else
+                HeaderText[i] :=
+                  StrSubstNo('%1 - %2 %3', EndingDate - PeriodEndDate[i] + 1, EndingDate - PeriodStartDate[i] + 1, Text002);
+            i := i + 1;
+        end;
+        if HeadingType = HeadingType::"Date Interval" then
+            HeaderText[i] := StrSubstNo('%1 %2', BeforeTok, PeriodStartDate[i - 1])
+        else
+            HeaderText[i] := StrSubstNo('%1 %2 %3', AfterTok, EndingDate - PeriodStartDate[i - 1] + 1, Text002);
+    end;
+
+    local procedure GetPeriodIndex(Date: Date): Integer
+    var
+        i: Integer;
+    begin
+        for i := 1 to ArrayLen(PeriodEndDate) do
+            if Date in [PeriodStartDate[i] .. PeriodEndDate[i]] then
+                exit(i);
+    end;
+
+
+    local procedure LogReportTelemetry(StartDateTime: DateTime; FinishDateTime: DateTime; NumberOfLines: Integer)
+    var
+        Dimensions: Dictionary of [Text, Text];
+        ReportDuration: BigInteger;
+    begin
+        ReportDuration := FinishDateTime - StartDateTime;
+        Dimensions.Add('Category', TelemetryCategoryTxt);
+        Dimensions.Add('ReportStartTime', Format(StartDateTime, 0, 9));
+        Dimensions.Add('ReportFinishTime', Format(FinishDateTime, 0, 9));
+        Dimensions.Add('ReportDuration', Format(ReportDuration));
+        Dimensions.Add('NumberOfLines', Format(NumberOfLines));
+        Session.LogMessage('0000FJM', AgedARReportGeneratedTxt, Verbosity::Normal, DataClassification::SystemMetadata, TelemetryScope::ExtensionPublisher, Dimensions);
+    end;
 
 }

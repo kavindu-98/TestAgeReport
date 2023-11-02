@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<!-- <?xml version="1.0" encoding="utf-8"?>
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -259,6 +259,35 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="BalanceCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>BalanceCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>BalanceCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Name1_ItemCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Name1_ItemCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Name1_ItemCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="No_ItemCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>No_ItemCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>No_ItemCaption</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -301,29 +330,221 @@ End Function
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
-        <Field Name="Document_No_">
-          <DataField>Document_No_</DataField>
+        <Field Name="PageGroupNo">
+          <DataField>PageGroupNo</DataField>
         </Field>
-        <Field Name="Posting_Date">
-          <DataField>Posting_Date</DataField>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
         </Field>
-        <Field Name="Item_No_">
-          <DataField>Item_No_</DataField>
+        <Field Name="FormatEndingDate">
+          <DataField>FormatEndingDate</DataField>
         </Field>
-        <Field Name="Unit_of_Measure_Code">
-          <DataField>Unit_of_Measure_Code</DataField>
+        <Field Name="PostingDate">
+          <DataField>PostingDate</DataField>
         </Field>
-        <Field Name="Quantity">
-          <DataField>Quantity</DataField>
+        <Field Name="PrintItemQty">
+          <DataField>PrintItemQty</DataField>
         </Field>
-        <Field Name="QuantityFormat">
-          <DataField>QuantityFormat</DataField>
+        <Field Name="TableCaptnItemFilter">
+          <DataField>TableCaptnItemFilter</DataField>
         </Field>
-        <Field Name="Cost_Amount__Actual_">
-          <DataField>Cost_Amount__Actual_</DataField>
+        <Field Name="ItemFilter">
+          <DataField>ItemFilter</DataField>
         </Field>
-        <Field Name="Cost_Amount__Actual_Format">
-          <DataField>Cost_Amount__Actual_Format</DataField>
+        <Field Name="AgedbyDocumnetDate">
+          <DataField>AgedbyDocumnetDate</DataField>
+        </Field>
+        <Field Name="HeaderText5">
+          <DataField>HeaderText5</DataField>
+        </Field>
+        <Field Name="HeaderText4">
+          <DataField>HeaderText4</DataField>
+        </Field>
+        <Field Name="HeaderText3">
+          <DataField>HeaderText3</DataField>
+        </Field>
+        <Field Name="HeaderText2">
+          <DataField>HeaderText2</DataField>
+        </Field>
+        <Field Name="HeaderText1">
+          <DataField>HeaderText1</DataField>
+        </Field>
+        <Field Name="PrintDetails">
+          <DataField>PrintDetails</DataField>
+        </Field>
+        <Field Name="ItemAgingReportCptn">
+          <DataField>ItemAgingReportCptn</DataField>
+        </Field>
+        <Field Name="CurrReportPageNoCptn">
+          <DataField>CurrReportPageNoCptn</DataField>
+        </Field>
+        <Field Name="AllQtyCptn">
+          <DataField>AllQtyCptn</DataField>
+        </Field>
+        <Field Name="ItemAgedQtyCptn">
+          <DataField>ItemAgedQtyCptn</DataField>
+        </Field>
+        <Field Name="ILEEndDateQtyCptn">
+          <DataField>ILEEndDateQtyCptn</DataField>
+        </Field>
+        <Field Name="ILEEndDateDueDateCptn">
+          <DataField>ILEEndDateDueDateCptn</DataField>
+        </Field>
+        <Field Name="ILEEndDateDocNoCptn">
+          <DataField>ILEEndDateDocNoCptn</DataField>
+        </Field>
+        <Field Name="ILEEndDatePstngDateCptn">
+          <DataField>ILEEndDatePstngDateCptn</DataField>
+        </Field>
+        <Field Name="ILEEndDateDocTypeCptn">
+          <DataField>ILEEndDateDocTypeCptn</DataField>
+        </Field>
+        <Field Name="TotalQtyCptn">
+          <DataField>TotalQtyCptn</DataField>
+        </Field>
+        <Field Name="NewPagePerItem">
+          <DataField>NewPagePerItem</DataField>
+        </Field>
+        <Field Name="GrandTotalILE5RemQty">
+          <DataField>GrandTotalILE5RemQty</DataField>
+        </Field>
+        <Field Name="GrandTotalILE5RemQtyFormat">
+          <DataField>GrandTotalILE5RemQtyFormat</DataField>
+        </Field>
+        <Field Name="GrandTotalILE4RemQty">
+          <DataField>GrandTotalILE4RemQty</DataField>
+        </Field>
+        <Field Name="GrandTotalILE4RemQtyFormat">
+          <DataField>GrandTotalILE4RemQtyFormat</DataField>
+        </Field>
+        <Field Name="GrandTotalILE3RemQty">
+          <DataField>GrandTotalILE3RemQty</DataField>
+        </Field>
+        <Field Name="GrandTotalILE3RemQtyFormat">
+          <DataField>GrandTotalILE3RemQtyFormat</DataField>
+        </Field>
+        <Field Name="GrandTotalILE2RemQty">
+          <DataField>GrandTotalILE2RemQty</DataField>
+        </Field>
+        <Field Name="GrandTotalILE2RemQtyFormat">
+          <DataField>GrandTotalILE2RemQtyFormat</DataField>
+        </Field>
+        <Field Name="GrandTotalILE1RemQty">
+          <DataField>GrandTotalILE1RemQty</DataField>
+        </Field>
+        <Field Name="GrandTotalILE1RemQtyFormat">
+          <DataField>GrandTotalILE1RemQtyFormat</DataField>
+        </Field>
+        <Field Name="GrandTotalILEQty">
+          <DataField>GrandTotalILEQty</DataField>
+        </Field>
+        <Field Name="GrandTotalILEQtyFormat">
+          <DataField>GrandTotalILEQtyFormat</DataField>
+        </Field>
+        <Field Name="GrandTotalILE1Qty">
+          <DataField>GrandTotalILE1Qty</DataField>
+        </Field>
+        <Field Name="GrandTotalILE1QtyFormat">
+          <DataField>GrandTotalILE1QtyFormat</DataField>
+        </Field>
+        <Field Name="Name1_Item">
+          <DataField>Name1_Item</DataField>
+        </Field>
+        <Field Name="No_Item">
+          <DataField>No_Item</DataField>
+        </Field>
+        <Field Name="ILEEndDateRemQty">
+          <DataField>ILEEndDateRemQty</DataField>
+        </Field>
+        <Field Name="ILEEndDateRemQtyFormat">
+          <DataField>ILEEndDateRemQtyFormat</DataField>
+        </Field>
+        <Field Name="AgedILE1RemQty">
+          <DataField>AgedILE1RemQty</DataField>
+        </Field>
+        <Field Name="AgedILE1RemQtyFormat">
+          <DataField>AgedILE1RemQtyFormat</DataField>
+        </Field>
+        <Field Name="AgedILE2RemQty">
+          <DataField>AgedILE2RemQty</DataField>
+        </Field>
+        <Field Name="AgedILE2RemQtyFormat">
+          <DataField>AgedILE2RemQtyFormat</DataField>
+        </Field>
+        <Field Name="AgedILE3RemQty">
+          <DataField>AgedILE3RemQty</DataField>
+        </Field>
+        <Field Name="AgedILE3RemQtyFormat">
+          <DataField>AgedILE3RemQtyFormat</DataField>
+        </Field>
+        <Field Name="AgedILE4RemQty">
+          <DataField>AgedILE4RemQty</DataField>
+        </Field>
+        <Field Name="AgedILE4RemQtyFormat">
+          <DataField>AgedILE4RemQtyFormat</DataField>
+        </Field>
+        <Field Name="AgedILE5RemQty">
+          <DataField>AgedILE5RemQty</DataField>
+        </Field>
+        <Field Name="AgedILE5RemQtyFormat">
+          <DataField>AgedILE5RemQtyFormat</DataField>
+        </Field>
+        <Field Name="ILEEndDateQty">
+          <DataField>ILEEndDateQty</DataField>
+        </Field>
+        <Field Name="ILEEndDateQtyFormat">
+          <DataField>ILEEndDateQtyFormat</DataField>
+        </Field>
+        <Field Name="ILEEndDateDocNo">
+          <DataField>ILEEndDateDocNo</DataField>
+        </Field>
+        <Field Name="ILEDocType">
+          <DataField>ILEDocType</DataField>
+        </Field>
+        <Field Name="ILEPostingDate">
+          <DataField>ILEPostingDate</DataField>
+        </Field>
+        <Field Name="ILEEndDate_ExtDocNo">
+          <DataField>ILEEndDate_ExtDocNo</DataField>
+        </Field>
+        <Field Name="TotalILE1Qty">
+          <DataField>TotalILE1Qty</DataField>
+        </Field>
+        <Field Name="TotalILE1QtyFormat">
+          <DataField>TotalILE1QtyFormat</DataField>
+        </Field>
+        <Field Name="TotalILE1RemQty">
+          <DataField>TotalILE1RemQty</DataField>
+        </Field>
+        <Field Name="TotalILE1RemQtyFormat">
+          <DataField>TotalILE1RemQtyFormat</DataField>
+        </Field>
+        <Field Name="TotalILE2RemQty">
+          <DataField>TotalILE2RemQty</DataField>
+        </Field>
+        <Field Name="TotalILE2RemQtyFormat">
+          <DataField>TotalILE2RemQtyFormat</DataField>
+        </Field>
+        <Field Name="TotalILE3RemQty">
+          <DataField>TotalILE3RemQty</DataField>
+        </Field>
+        <Field Name="TotalILE3RemQtyFormat">
+          <DataField>TotalILE3RemQtyFormat</DataField>
+        </Field>
+        <Field Name="TotalILE4RemQty">
+          <DataField>TotalILE4RemQty</DataField>
+        </Field>
+        <Field Name="TotalILE4RemQtyFormat">
+          <DataField>TotalILE4RemQtyFormat</DataField>
+        </Field>
+        <Field Name="TotalILE5RemQty">
+          <DataField>TotalILE5RemQty</DataField>
+        </Field>
+        <Field Name="TotalILE5RemQtyFormat">
+          <DataField>TotalILE5RemQtyFormat</DataField>
+        </Field>
+        <Field Name="TotalCheck">
+          <DataField>TotalCheck</DataField>
         </Field>
       </Fields>
       <Query>
@@ -332,4 +553,4 @@ End Function
       </Query>
     </DataSet>
   </DataSets>
-</Report>
+</Report> -->
